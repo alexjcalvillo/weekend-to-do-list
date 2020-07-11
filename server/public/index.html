@@ -11,11 +11,28 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Hello!</h1>
-    <button id="js-btn-addTask">Add Task</button>
-    <div class="js-taskInputField"></div>
-    <input type="text" id="js-taskInput" placeholder="Task" />
-    <input type="text" id="js-notesInput" placeholder="Notes" />
-    <input type="complete" id="js-completeInput" placeholder="Complete" />
+    <div>
+      <h1>Hello!</h1>
+      <button id="js-btn-addTask">Add Task</button>
+      <div class="js-taskInputField"></div>
+      <input type="text" id="js-taskInput" placeholder="Task" />
+      <input type="text" id="js-notesInput" placeholder="Notes" />
+      <input type="complete" id="js-completeInput" placeholder="Complete" />
+    </div>
+
+    <hr />
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Notes</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody id="js-tasksDisplay"></tbody>
+      </table>
+    </div>
   </body>
 </html>
