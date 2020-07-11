@@ -71,6 +71,24 @@ function deleteTask() {
 
 function completeTask() {
   console.log('in completeTask');
+  const id = $(this).data('id');
+  console.log(id);
+  const statusNow = $(this).data('status');
+  console.log(statusNow);
+  $.ajax({
+    type: 'PUT',
+    url: `/api/tasks/${id}`,
+    data: {
+      statusNow,
+    },
+  })
+    .then((response) => {
+      console.log('PUT', response);
+      getTasks();
+    })
+    .catch((err) => {
+      console.log('Nope - ', err);
+    });
 }
 
 //
@@ -87,7 +105,7 @@ function renderTaskTable(taskList) {
             <td>${task.status}</td>
             <td>
                 <button id="js-btn-deleteTask">Delete</button>
-                <button id="js-btn-completeTask">Complete</button>
+                <button data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
             </td>
         </tr>
         `);
