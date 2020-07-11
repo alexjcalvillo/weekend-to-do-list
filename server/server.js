@@ -12,8 +12,16 @@ const task = {
   status: true, // boolean value
 };
 
+const taskList = [];
+
 app.get('/api/tasks', (req, res) => {
-  res.send(task);
+  res.send(taskList);
+});
+
+app.post('/api/tasks', (req, res) => {
+  const taskData = req.body;
+  taskList.push(taskData);
+  res.sendStatus(201);
 });
 
 app.listen(PORT, () => {

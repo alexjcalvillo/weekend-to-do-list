@@ -3,7 +3,9 @@ $(document).ready(init);
 function init() {
   console.log('Client.js ');
   $('#js-btn-addTask').on('click', addTaskField);
-  $('#js-taskInputField').on('click', '#js-postTask', postTask);
+  $('.js-taskInputField').on('click', 'button.js-postTask', postTask);
+  $('#js-tasksDisplay').on('click', '#js-btn-deleteTask', deleteTask);
+  $('#js-tasksDisplay').on('click', '#js-btn-completeTask', completeTask);
 
   getTasks();
 }
@@ -11,12 +13,13 @@ function init() {
 // EVENT LISTENERS
 // ----------------
 function addTaskField() {
+  console.log('in addTaskField');
   $('.js-taskInputField').append(`
     <input type="text" id="js-taskInput" placeholder="Task" />
     <input type="text" id="js-notesInput" placeholder="Notes" />
-    <input type="complete" id="js-completeInput" placeholder="Complete" />
-    <button id="js-postTask">Add Task</button>
+    <button class="js-postTask">Add Task</button>
     `);
+  // <input type="complete" id="js-completeInput" placeholder="Complete" />
 }
 
 //
@@ -38,18 +41,59 @@ function getTasks() {
 }
 
 function postTask() {
-  console.log('POST');
+  console.log('in postTask');
+  const task = $(this).parent().children('#js-taskInput').val();
+  const notes = $(this).parent().children('#js-notesInput').val();
+  //   const status = $(this).parent().children('#js-completeInput').val();
+
+  $.ajax({
+    type: 'POST',
+    url: '/api/tasks',
+    data: {
+      task,
+      notes,
+      status: false,
+    },
+  })
+    .then((response) => {
+      console.log('POSTED - ', response);
+      getTasks();
+      resetInputs();
+    })
+    .catch((err) => {
+      console.log("It didn't work. ", err);
+    });
+}
+
+function deleteTask() {
+  console.log('in deleteTask');
+}
+
+function completeTask() {
+  console.log('in completeTask');
 }
 
 //
 // RENDER
 // -------
 // TO DO:
-function renderTaskTable(task) {
-  $('#js-tasksDisplay').append(`
-    <tr>
-        <td>${task.task}</td>
-        <td>${task.notes}</td>
-        <td>${task.status}</td>
-    `);
+function renderTaskTable(taskList) {
+  $('#js-tasksDisplay').empty();
+  for (let task of taskList) {
+    $('#js-tasksDisplay').append(`
+        <tr>
+            <td>${task.task}</td>
+            <td>${task.notes}</td>
+            <td>${task.status}</td>
+            <td>
+                <button id="js-btn-deleteTask">Delete</button>
+                <button id="js-btn-completeTask">Complete</button>
+            </td>
+        </tr>
+        `);
+  }
+}
+
+function resetInputs() {
+  $('.js-taskInputField').empty();
 }
