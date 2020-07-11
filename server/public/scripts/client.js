@@ -98,6 +98,9 @@ function completeTask() {
     .then((response) => {
       console.log('PUT', response);
       getTasks();
+      if ($('#js-btn-completeTask').data('status') === true) {
+        $('#js-btn-completeTask').parent().parent().addClass('green');
+      }
     })
     .catch((err) => {
       console.log('Nope - ', err);
@@ -122,6 +125,9 @@ function renderTaskTable(taskList) {
             </td>
         </tr>
         `);
+    if ($('#js-btn-completeTask').data('status') === true) {
+      $('#js-btn-completeTask').parent().parent().addClass('green');
+    }
   }
 }
 
