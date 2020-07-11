@@ -32,6 +32,21 @@ router.post('/', (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  const query = `DELETE FROM "tasks" WHERE id = $1;`;
+
+  pool
+    .query(query, [id])
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("It's broken.");
+      res.sendStatus(500);
+    });
+});
+
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   console.log(id);
