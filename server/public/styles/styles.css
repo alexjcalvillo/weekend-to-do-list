@@ -7,3 +7,11 @@ body {
 .green {
   background-color: rgb(114, 186, 114);
 }
+
+nav {
+  display: inline-block;
+}
+
+.svgNav {
+  color: rgb(114, 186, 114);
+}
