@@ -15,7 +15,10 @@
     <title>To Do It</title>
   </head>
   <body class="bg-light">
-    <nav class="d-flex align-items-center py-2 pl-4">
+    <!-- Navbar -->
+    <nav
+      class="d-flex align-items-center border-bottom bg-light py-2 pl-4 mb-0"
+    >
       <svg
         class="svgNav"
         width="2em"
@@ -33,26 +36,49 @@
           d="M6.5 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V3zm-4 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V3zm8 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V3z"
         />
       </svg>
-      <h1 class="text-primary">OrganizeMe</h1>
+      <h1 class="text-primary navbar-nav mr-auto">OrganizeMe</h1>
     </nav>
-    <div class="container">
-      <hr />
-      <button class="btn btn-primary" id="js-btn-addTask">Create Task</button>
-      <div class="js-taskInputField"></div>
-      <div class="px-5 py-3">
-        <div class="container px-5">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Tasks</th>
-                <th scope="col" colspan="2">Status</th>
-              </tr>
-            </thead>
-            <tbody id="js-tasksDisplay"></tbody>
-          </table>
+    <!-- Builds out body with 2 sections:
+      - a sidebar with options to be built
+      - a central location for tasks -->
+
+      <!-- First defines the navbar situated on the left side of the screen -->
+    <div class="row">
+      <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+        <div class="sidebar-sticky white-word pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="#">School Tasks</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">House Chores/Tasks</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Weekend Challenge Tasks</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Personal Project Tasks</a></li>
+          </ul>
+        </div>
+      </nav>
+        <!-- Second is the central user area with the tasks listed -->
+      <div class="container min-height bg-light py-5">
+        <button class="btn btn-primary" id="js-btn-addTask">Create Task</button>
+        <div class="js-taskInputField"></div>
+          <div class="px-5 py-3">
+            <div class="container px-5">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Tasks</th>
+                    <th scope="col" colspan="2">Status</th>
+                  </tr>
+                </thead>
+              <tbody id="js-tasksDisplay"></tbody>
+            </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-light">
+      <h2 class="text-primary navbar-nav mr-auto">OrganizeMe</h2>
+      <p class="text-right my-md-0">An application by Alex Calvillo</p>
+    </navbar>
   </body>
 </html>
