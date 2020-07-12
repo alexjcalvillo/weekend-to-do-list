@@ -136,7 +136,6 @@ function completeTask(id, statusNow) {
 //
 // RENDER
 // -------
-// TO DO:
 function renderTaskTable(taskList) {
   $('#js-tasksDisplay').empty();
   for (let task of taskList) {
@@ -178,11 +177,6 @@ function renderTaskTable(taskList) {
             </td>
         </tr>
         `);
-    // const $row = $('#js-tasksDisplay').children(`.${task.status}`);
-    // const rowStatus = $row.data('status');
-    // if (rowStatus === true) {
-    //   $('#js-tasksDisplay').children(`.${task.status}`).addClass('green');
-    // }
   }
 }
 
