@@ -20,11 +20,20 @@ function init() {
 function addTaskField() {
   console.log('in addTaskField');
   $('.js-taskInputField').append(`
-    <input type="text" id="js-taskInput" placeholder="Task" />
-    <hr />
-    <textarea type="text" id="js-notesInput" placeholder="Notes"></textarea>
-    <button class="js-postTask btn btn-primary">Add Task</button>
-    <button class="js-btn-cancelAdd btn btn-primary">X</button>
+    <div class="container mx-auto" style="width: 800px;">
+        <div class="row py-4 px-2 bg-light border border-primary">
+            <div class="col-md-6">
+            <p>This is where you input your tasks and notes pertaining to them!</p>
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="js-taskInput" style="min-width: 100%;" placeholder="Task" />
+                <hr />
+                <textarea type="text" id="js-notesInput" style="min-width: 100%;" placeholder="Notes"></textarea>
+                <button class="js-postTask btn btn-primary">Add Task</button>
+                <button class="js-btn-cancelAdd btn btn-primary">X</button>
+            </div>
+        </div>
+    </div>
     `);
   $('#js-btn-addTask').attr('disabled', true);
   // <input type="complete" id="js-completeInput" placeholder="Complete" />

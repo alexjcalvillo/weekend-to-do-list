@@ -20,3 +20,8 @@ body {
 .tall {
   height: 100%;
 }
+
+.inputBox {
+  z-index: 1;
+  position: absolute;
+}
