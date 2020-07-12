@@ -21,7 +21,8 @@ function addTaskField() {
   console.log('in addTaskField');
   $('.js-taskInputField').append(`
     <input type="text" id="js-taskInput" placeholder="Task" />
-    <input type="text" id="js-notesInput" placeholder="Notes" />
+    <hr />
+    <textarea type="text" id="js-notesInput" placeholder="Notes"></textarea>
     <button class="js-postTask btn btn-primary">Add Task</button>
     <button class="js-btn-cancelAdd btn btn-primary">X</button>
     `);

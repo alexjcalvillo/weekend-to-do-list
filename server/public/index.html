@@ -17,7 +17,7 @@
   <body class="bg-light">
     <!-- Navbar -->
     <nav
-      class="d-flex align-items-center border-bottom bg-light py-2 pl-4 mb-0"
+      class="d-flex align-items-center sticky-top border-bottom navbar-light py-2 pl-4 mb-0" style="background-color: #e3f2fd;"
     >
       <svg
         class="svgNav"
@@ -44,7 +44,7 @@
 
       <!-- First defines the navbar situated on the left side of the screen -->
     <div class="row">
-      <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+      <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse bd-links">
         <div class="sidebar-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -57,8 +57,8 @@
       </nav>
         <!-- Second is the central user area with the tasks listed -->
       <div class="container min-height bg-light py-5">
-        <button class="btn btn-primary" id="js-btn-addTask">Create Task</button>
-        <div class="js-taskInputField"></div>
+        <button class="btn btn-primary ml-5" id="js-btn-addTask">Create Task</button>
+        <div class="container mx-auto js-taskInputField" style="width: 200px"></div>
           <div class="px-5 py-3">
             <div class="container px-5">
               <table class="table">
@@ -76,9 +76,9 @@
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-light">
+    <nav class="navbar navbar-expand-sm navbar-light border border-top bg-light" style="background-color: #e3f2fd;">
       <h2 class="text-primary navbar-nav mr-auto">OrganizeMe</h2>
       <p class="text-right my-md-0">An application by Alex Calvillo</p>
-    </navbar>
+    </nav>
   </body>
 </html>
