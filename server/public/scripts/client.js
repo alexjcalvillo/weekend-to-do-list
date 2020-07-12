@@ -5,7 +5,11 @@ function init() {
   $('#js-btn-addTask').on('click', addTaskField);
   $('.js-taskInputField').on('click', 'button.js-postTask', postTask);
   $('#js-tasksDisplay').on('click', '#js-btn-deleteTask', deleteTask);
-  $('#js-tasksDisplay').on('click', '#js-btn-completeTask', completeTask);
+  $('#js-tasksDisplay').on(
+    'click',
+    '#js-btn-completeTask',
+    clickedCompleteTask
+  );
 
   getTasks();
 }
@@ -22,6 +26,15 @@ function addTaskField() {
   // <input type="complete" id="js-completeInput" placeholder="Complete" />
 }
 
+function clickedCompleteTask() {
+  console.log('in clickedCompleteTask');
+  const id = $(this).data('id');
+  console.log(id);
+  const statusNow = $(this).data('status');
+  console.log(statusNow);
+  completeTask(id, statusNow);
+}
+
 //
 // AJAX CALLS
 // ----------
@@ -34,6 +47,7 @@ function getTasks() {
     .then((response) => {
       console.log(response);
       renderTaskTable(response);
+      updateRender(response);
     })
     .catch((err) => {
       console.log("Something isn't right, ", err);
@@ -82,12 +96,7 @@ function deleteTask() {
     });
 }
 
-function completeTask() {
-  console.log('in completeTask');
-  const id = $(this).data('id');
-  console.log(id);
-  const statusNow = $(this).data('status');
-  console.log(statusNow);
+function completeTask(id, statusNow) {
   $.ajax({
     type: 'PUT',
     url: `/api/tasks/${id}`,
@@ -98,9 +107,6 @@ function completeTask() {
     .then((response) => {
       console.log('PUT', response);
       getTasks();
-      if ($('#js-btn-completeTask').data('status') === true) {
-        $('#js-btn-completeTask').parent().parent().addClass('green');
-      }
     })
     .catch((err) => {
       console.log('Nope - ', err);
@@ -115,22 +121,35 @@ function renderTaskTable(taskList) {
   $('#js-tasksDisplay').empty();
   for (let task of taskList) {
     $('#js-tasksDisplay').append(`
-        <tr>
+        <tr class="${task.status}" data-status="${task.status}">
             <td>${task.task}</td>
             <td>${task.notes}</td>
             <td>${task.status}</td>
-            <td>
+            <td class="buttons">
                 <button data-id="${task.id}" id="js-btn-deleteTask">Delete</button>
                 <button data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
             </td>
         </tr>
         `);
-    if ($('#js-btn-completeTask').data('status') === true) {
-      $('#js-btn-completeTask').parent().parent().addClass('green');
-    }
+    // const $row = $('#js-tasksDisplay').children(`.${task.status}`);
+    // const rowStatus = $row.data('status');
+    // if (rowStatus === true) {
+    //   $('#js-tasksDisplay').children(`.${task.status}`).addClass('green');
+    // }
   }
 }
 
 function resetInputs() {
   $('.js-taskInputField').empty();
+}
+
+function updateRender(tasks) {
+  for (let task of tasks) {
+    const $row = $('#js-tasksDisplay').children(`.${task.status}`);
+    const rowStatus = $row.data('status');
+    if (rowStatus === true) {
+      $row.addClass('green');
+      $row.children('.buttons').children().remove('#js-btn-completeTask');
+    }
+  }
 }

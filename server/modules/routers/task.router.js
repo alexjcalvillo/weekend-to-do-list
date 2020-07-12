@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('../pool');
 
 router.get('/', (req, res) => {
-  const query = `SELECT * FROM "tasks";`;
+  const query = `SELECT * FROM "tasks" ORDER BY "id";`;
 
   pool
     .query(query)
