@@ -1,8 +1,9 @@
 body {
-  background-color: black;
-  color: white;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
 }
 
 .green {
-  background-color: green;
+  background-color: rgb(114, 186, 114);
 }
