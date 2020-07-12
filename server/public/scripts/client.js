@@ -10,6 +10,7 @@ function init() {
     '#js-btn-completeTask',
     clickedCompleteTask
   );
+  $('.js-taskInputField').on('click', '.js-btn-cancelAdd', cancelAdd);
 
   getTasks();
 }
@@ -21,9 +22,16 @@ function addTaskField() {
   $('.js-taskInputField').append(`
     <input type="text" id="js-taskInput" placeholder="Task" />
     <input type="text" id="js-notesInput" placeholder="Notes" />
-    <button class="btn btn-primary" class="js-postTask">Add Task</button>
+    <button class="js-postTask btn btn-primary">Add Task</button>
+    <button class="js-btn-cancelAdd">X</button>
     `);
+  $('#js-btn-addTask').attr('disabled', true);
   // <input type="complete" id="js-completeInput" placeholder="Complete" />
+}
+
+function cancelAdd() {
+  console.log('in cancelAdd');
+  $('.js-taskInputField').empty();
 }
 
 function clickedCompleteTask() {
@@ -73,6 +81,7 @@ function postTask() {
       console.log('POSTED - ', response);
       getTasks();
       resetInputs();
+      $('#js-btn-addTask').attr('disabled', false);
     })
     .catch((err) => {
       console.log("It didn't work. ", err);
