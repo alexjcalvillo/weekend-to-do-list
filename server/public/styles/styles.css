@@ -2,8 +2,26 @@ body {
   color: black;
   font-family: 'Montserrat', sans-serif;
   font-size: 1.2rem;
+  height: 100%;
+}
+
+.min-height {
+  min-height: 100vh;
 }
 
 .green {
   background-color: rgb(114, 186, 114);
+}
+
+.svgNav {
+  color: rgb(114, 186, 114);
+}
+
+.tall {
+  height: 100%;
+}
+
+.inputBox {
+  z-index: 1;
+  position: absolute;
 }
