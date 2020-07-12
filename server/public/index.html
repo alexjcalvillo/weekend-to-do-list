@@ -15,28 +15,28 @@
     <title>To Do Organizer</title>
   </head>
   <body class="bg-light">
-    <div>
-      <nav>
-        <h1>Hello!</h1>
-        <p>all in the navbar</p>
-      </nav>
-      <button id="js-btn-addTask">Create Task</button>
+    <div class="container">
+      <div>
+        <nav>
+          <h1>Hello!</h1>
+        </nav>
+      </div>
+
+      <hr />
+      <button class="btn btn-primary" id="js-btn-addTask">Create Task</button>
       <div class="js-taskInputField"></div>
-    </div>
-
-    <hr />
-
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Notes</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="js-tasksDisplay"></tbody>
-      </table>
+      <div class="px-5 py-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Tasks</th>
+              <th scope="col" colspan="2">Status</th>
+            </tr>
+          </thead>
+          <tbody id="js-tasksDisplay"></tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

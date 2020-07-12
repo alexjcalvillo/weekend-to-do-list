@@ -21,7 +21,7 @@ function addTaskField() {
   $('.js-taskInputField').append(`
     <input type="text" id="js-taskInput" placeholder="Task" />
     <input type="text" id="js-notesInput" placeholder="Notes" />
-    <button class="js-postTask">Add Task</button>
+    <button class="btn btn-primary" class="js-postTask">Add Task</button>
     `);
   // <input type="complete" id="js-completeInput" placeholder="Complete" />
 }
@@ -120,14 +120,41 @@ function completeTask(id, statusNow) {
 function renderTaskTable(taskList) {
   $('#js-tasksDisplay').empty();
   for (let task of taskList) {
+    let status = null;
+    if (task.status === false) {
+      status = 'incomplete';
+    } else {
+      status = 'complete';
+    }
     $('#js-tasksDisplay').append(`
-        <tr class="${task.status}" data-status="${task.status}">
-            <td>${task.task}</td>
-            <td>${task.notes}</td>
-            <td>${task.status}</td>
+        <tr class="${task.status} text-muted pt-3" data-status="${task.status}">
+            <th scope="row">
+            <svg
+                width="1.5em"
+                height="1.5em"
+                viewBox="0 0 16 16"
+                class="bi bi-bookmark"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+            <path
+                fill-rule="evenodd"
+                d="M8 12l5 3V3a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V3a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10.234z"
+            />
+            </svg>
+            </th>
+            <td>
+            <strong class="d-block font-weight-bold text-gray-dark">${task.task}</strong>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    Task notes: ${task.notes}
+                </p>
+            </td>
+            <td>
+                ${status}
+            </td>
             <td class="buttons">
-                <button data-id="${task.id}" id="js-btn-deleteTask">Delete</button>
-                <button data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
+                <button class="btn btn-primary" data-id="${task.id}" id="js-btn-deleteTask">Delete</button>
+                <button class="btn btn-primary" data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
             </td>
         </tr>
         `);
