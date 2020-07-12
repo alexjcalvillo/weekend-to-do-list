@@ -163,8 +163,8 @@ function renderTaskTable(taskList) {
                 ${status}
             </td>
             <td class="buttons">
-                <button class="btn btn-primary" data-id="${task.id}" id="js-btn-deleteTask">Delete</button>
-                <button class="btn btn-primary" data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
+                <button class="btn btn-danger" data-id="${task.id}" id="js-btn-deleteTask">Delete</button>
+                <button class="btn btn-success" data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
             </td>
         </tr>
         `);
