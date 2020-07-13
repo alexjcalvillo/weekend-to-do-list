@@ -10,6 +10,9 @@ function init() {
     '#js-btn-completeTask',
     clickedCompleteTask
   );
+  $('#myModal').on('shown.bs.modal', function () {
+    '#js-btn-deleteTask'.trigger('click');
+  });
   $('.js-taskInputField').on('click', '.js-btn-cancelAdd', cancelAdd);
 
   getTasks();
@@ -110,6 +113,7 @@ function deleteTask() {
   })
     .then((response) => {
       getTasks();
+      location.reload();
     })
     .catch((err) => {
       console.log('Oh no! ', err);
@@ -172,7 +176,28 @@ function renderTaskTable(taskList) {
                 ${status}
             </td>
             <td class="buttons">
-                <button class="btn btn-danger" data-id="${task.id}" id="js-btn-deleteTask">Delete</button>
+                <button class="btn btn-danger" data-id="${task.id}" data-toggle="modal" data-target="#exampleModalCenter">Delete</button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to delete this task?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, cancel</button>
+                        <button type="button" id="js-btn-deleteTask" data-id="${task.id}" data-dismiss="modal" class="btn btn-danger">Delete task</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <button class="btn btn-success" data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
             </td>
