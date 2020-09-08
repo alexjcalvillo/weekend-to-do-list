@@ -4,15 +4,12 @@ function init() {
   console.log('Client.js ');
   $('#js-btn-addTask').on('click', addTaskField);
   $('.js-taskInputField').on('click', 'button.js-postTask', postTask);
-  $('#js-tasksDisplay').on('click', '#js-btn-deleteTask', deleteTask);
+  $('#js-tasksDisplay').on('click', '#js-btn-deleteTask', clickDelete);
   $('#js-tasksDisplay').on(
     'click',
     '#js-btn-completeTask',
     clickedCompleteTask
   );
-  $('#myModal').on('shown.bs.modal', function () {
-    '#js-btn-deleteTask'.trigger('click');
-  });
   $('.js-taskInputField').on('click', '.js-btn-cancelAdd', cancelAdd);
 
   getTasks();
@@ -55,6 +52,31 @@ function clickedCompleteTask() {
   const statusNow = $(this).data('status');
   console.log(statusNow);
   completeTask(id, statusNow);
+}
+
+function clickDelete() {
+  const $target = $(this);
+  swal({
+    title: 'Are you sure?',
+    text: 'Once deleted, you will not be able to recover this task!',
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      deleteTask($target);
+      swal(
+        'Successfully deleted task! Way to check that off your list and outta the way.',
+        {
+          icon: 'success',
+        }
+      );
+    } else {
+      swal(
+        "Just keep swimming, just keep swimming. You'll check this off soon enough!"
+      );
+    }
+  });
 }
 
 //
@@ -102,9 +124,9 @@ function postTask() {
     });
 }
 
-function deleteTask() {
+function deleteTask(target) {
   console.log('in deleteTask');
-  const id = $(this).data('id');
+  const id = target.data('id');
   console.log(id);
 
   $.ajax({
@@ -150,7 +172,7 @@ function renderTaskTable(taskList) {
       status = 'complete';
     }
     $('#js-tasksDisplay').append(`
-        <tr class="${task.status} text-muted pt-3" data-status="${task.status}">
+        <tr class="${task.status} text-muted pt-3" data-id="${task.id}" data-status="${task.status}">
             <th scope="row">
                 <svg
                     width="1.5em"
@@ -176,30 +198,9 @@ function renderTaskTable(taskList) {
                 ${status}
             </td>
             <td class="buttons">
-                <button class="btn btn-danger" data-id="${task.id}" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModal">Delete Warning</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        Are you sure you want to delete this task?
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, cancel</button>
-                        <button type="button" id="js-btn-deleteTask" data-id="${task.id}" data-dismiss="modal" class="btn btn-danger">Delete task</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <button class="btn btn-danger" data-id="${task.id}" data-status="${task.status}" id="js-btn-deleteTask">Delete</button>
 
-                <button class="btn btn-success" data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
+            <button class="btn btn-success" data-id="${task.id}" data-status="${task.status}" id="js-btn-completeTask">Complete</button>
             </td>
         </tr>
         `);
@@ -226,3 +227,26 @@ function updateRender(tasks) {
     }
   }
 }
+
+// <button class="btn btn-danger" data-id="${task.id}" data-toggle="modal" data-target="#deleteModal">Delete</button>
+
+//                 <!-- Modal -->
+//                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+//                   <div class="modal-dialog modal-dialog-centered" role="document">
+//                     <div class="modal-content">
+//                       <div class="modal-header">
+//                         <h5 class="modal-title" id="deleteModal">Delete Warning</h5>
+//                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//                           <span aria-hidden="true">&times;</span>
+//                         </button>
+//                       </div>
+//                       <div class="modal-body">
+//                         Are you sure you want to delete this task?
+//                       </div>
+//                       <div class="modal-footer">
+//                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, cancel</button>
+//                         <button type="button" id="js-btn-deleteTask" data-id="${task.id}" data-dismiss="modal" class="btn btn-danger">Delete task</button>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
